@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f7f3">
+
+  <title>Friendly Surfaces | Discover Your Surface</title>
+  <meta name="description" content="Explore plywood, laminates, mica and decorative surfaces with Friendly Surfaces. Browse product catalogues and enquire directly on WhatsApp.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="script.js" defer></script>
+
+  <style>
+    /* NEW FRIENDLY SURFACES LOGO */
+    .brand-logo {
+      display: block;
+      width: 205px;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .footer-brand .brand-logo {
+      width: 190px;
+    }
+
+    /* REMOVE OLD LOGO DECORATION */
+    .brand .brand-mark,
+    .brand .brand-name {
+      display: none !important;
+    }
+
+    /* FULL-WIDTH HERO SLIDESHOW */
+    .hero-section.hero-background {
+      position: relative;
+      isolation: isolate;
+      display: block;
+      min-height: 580px;
+      padding: 0;
+      overflow: hidden;
+      background: #263b30;
+    }
+
+    .hero-background-slides {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .hero-background .hero-slide {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .hero-background .hero-slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .hero-background-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(20, 31, 25, .88) 0%,
+        rgba(20, 31, 25, .72) 42%,
+        rgba(20, 31, 25, .30) 75%,
+        rgba(20, 31, 25, .16) 100%
+      );
+    }
+
+    .hero-background .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      max-width: 1200px;
+      min-height: 580px;
+      margin: 0 auto;
+      padding: 85px 30px 90px;
+    }
+
+    .hero-background .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 630px;
+      color: #fff;
+    }
+
+    .hero-background .hero-content .eyebrow {
+      color: #dfc48c;
+    }
+
+    .hero-background .hero-content h1 {
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, .12);
+    }
+
+    .hero-background .hero-content h1 span {
+      color: #e2c58b;
+    }
+
+    .hero-background .hero-content p,
+    .hero-background .hero-note {
+      color: rgba(255, 255, 255, .92);
+    }
+
+    .hero-background .hero-note .note-dot {
+      background: #d8bd82;
+    }
+
+    .hero-background .btn-light {
+      color: #fff;
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(255, 255, 255, .8);
+    }
+
+    .hero-background .btn-light:hover {
+      color: #263b30;
+      background: #fff;
+    }
+
+    /* SLIDESHOW ARROWS */
+    .hero-slide-arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      transform: translateY(-50%);
+      border: 1px solid rgba(255, 255, 255, .55);
+      border-radius: 50%;
+      background: rgba(28, 49, 40, .78);
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .hero-slide-arrow:hover {
+      background: #d8bd82;
+      color: #192c24;
+    }
+
+    .hero-slide-prev {
+      left: 18px;
+    }
+
+    .hero-slide-next {
+      right: 18px;
+    }
+
+    /* SLIDESHOW DOTS */
+    .hero-background .hero-slide-dots {
+      position: absolute;
+      z-index: 5;
+      bottom: 22px;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 10px 13px;
+      transform: translateX(-50%);
+      border-radius: 30px;
+      background: rgba(25, 39, 32, .55);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-slide-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .hero-slide-dot.active {
+      width: 23px;
+      border-color: #d8bd82;
+      border-radius: 8px;
+      background: #d8bd82;
+    }
+
+    .hero-slide-arrow:focus-visible,
+    .hero-slide-dot:focus-visible {
+      outline: 3px solid #d8bd82;
+      outline-offset: 3px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 760px) {
+      .hero-section.hero-background,
+      .hero-background .hero-grid {
+        min-height: 560px;
+      }
+
+      .hero-background .hero-grid {
+        padding: 65px 22px 85px;
+      }
+
+      .hero-background-overlay {
+        background: linear-gradient(
+          90deg,
+          rgba(20, 31, 25, .88),
+          rgba(20, 31, 25, .56)
+        );
+      }
+
+      .hero-background .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-slide-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 22px;
+      }
+
+      .hero-slide-prev {
+        left: 9px;
+      }
+
+      .hero-slide-next {
+        right: 9px;
+      }
+
+      .brand-logo {
+        width: 175px;
+      }
+
+      .footer-brand .brand-logo {
+        width: 175px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .brand-logo {
+        width: 150px;
+      }
+
+      .hero-background .hero-grid {
+        padding-right: 17px;
+        padding-left: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-background .hero-slide {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    Surfaces that bring your ideas to life.
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand" aria-label="Friendly Surfaces home">
+        <img
+          src="assets/images/friendly-surfaces-logo.png"
+          alt="Friendly Surfaces"
+          class="brand-logo">
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mainNav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="index.html" class="active" aria-current="page">Home</a>
+        <a href="products.html">Products</a>
+        <a href="catalogue.html">Catalogues</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a
+          href="https://wa.me/917771936644"
+          class="nav-cta whatsapp-link"
+          target="_blank"
+          rel="noopener noreferrer">
+          Enquire Now ↗
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- FULL-WIDTH BACKGROUND SLIDESHOW -->
+    <section class="hero-section hero-background">
+
+      <div class="hero-background-slides" id="heroSlides">
+
+        <img
+          class="hero-slide active"
+          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=1800&amp;q=85"
+          alt="Modern interior with natural wood finishes"
+          fetchpriority="high">
+
+        <img
+          class="hero-slide"
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&amp;fit=crop&amp;w=1800&amp;q=85"
+          alt="Contemporary interior and furniture"
+          loading="lazy">
+
+        <img
+          class="hero-slide"
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&amp;fit=crop&amp;w=1800&amp;q=85"
+          alt="Warm modern interior finishes"
+          loading="lazy">
+
+        <img
+          class="hero-slide"
+          src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&amp;fit=crop&amp;w=1800&amp;q=85"
+          alt="Decorative materials in a modern home"
+          loading="lazy">
+
+      </div>
+
+      <div class="hero-background-overlay"></div>
+
+      <button
+        type="button"
+        class="hero-slide-arrow hero-slide-prev"
+        id="heroPrev"
+        aria-label="Previous photograph">&#8249;</button>
+
+      <button
+        type="button"
+        class="hero-slide-arrow hero-slide-next"
+        id="heroNext"
+        aria-label="Next photograph">&#8250;</button>
+
+      <div class="container hero-grid">
+        <div class="hero-content">
+
+          <span class="eyebrow">MATERIALS FOR BETTER SPACES</span>
+
+          <h1>
+            Good spaces<br>
+            begin with the<br>
+            <span>right surface.</span>
+          </h1>
+
+          <p>
+            Discover plywood, laminates and decorative surfaces
+            that bring character, warmth and personality to every space.
+          </p>
+
+          <div class="hero-actions">
+            <a href="products.html" class="btn btn-dark">
+              Explore Products <span>↗</span>
+            </a>
+
+            <a href="catalogue.html" class="btn btn-light">
+              View Catalogues
+            </a>
+          </div>
+
+          <div class="hero-note">
+            <span class="note-dot"></span>
+            Explore products and enquire directly with us.
+          </div>
+
+        </div>
+      </div>
+
+      <div class="hero-slide-dots" id="heroSlideDots">
+        <button
+          class="hero-slide-dot active"
+          type="button"
+          aria-label="Show photograph 1"
+          aria-current="true"></button>
+
+        <button
+          class="hero-slide-dot"
+          type="button"
+          aria-label="Show photograph 2"></button>
+
+        <button
+          class="hero-slide-dot"
+          type="button"
+          aria-label="Show photograph 3"></button>
+
+        <button
+          class="hero-slide-dot"
+          type="button"
+          aria-label="Show photograph 4"></button>
+      </div>
+
+    </section>
+
+    <!-- PRODUCT CATEGORIES -->
+    <section class="section category-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">EXPLORE OUR RANGE</span>
+            <h2>Find the right <span>material.</span></h2>
+          </div>
+
+          <a href="products.html" class="text-link">
+            View all products ↗
+          </a>
+        </div>
+
+        <div class="category-grid">
+
+          <a class="category-card" href="products.html?category=laminates">
+            <div class="category-number">01 / FINISH</div>
+
+            <div class="category-art laminate-art">
+              <span class="material-swatch swatch-one"></span>
+              <span class="material-swatch swatch-two"></span>
+              <span class="material-swatch swatch-three"></span>
+            </div>
+
+            <div class="category-info">
+              <div>
+                <h3>Laminates &amp; Mica</h3>
+                <p>Colours, textures and finishes</p>
+              </div>
+              <span class="round-arrow">↗</span>
+            </div>
+          </a>
+
+          <a class="category-card" href="products.html?category=plywood">
+            <div class="category-number">02 / FOUNDATION</div>
+
+            <div class="category-art plywood-art">
+              <div class="plywood-sheet sheet-back"></div>
+              <div class="plywood-sheet sheet-middle"></div>
+              <div class="plywood-sheet sheet-front"></div>
+            </div>
+
+            <div class="category-info">
+              <div>
+                <h3>Plywood</h3>
+                <p>A foundation for your ideas</p>
+              </div>
+              <span class="round-arrow">↗</span>
+            </div>
+          </a>
+
+          <a class="category-card" href="products.html?category=decorative">
+            <div class="category-number">03 / CHARACTER</div>
+
+            <div class="category-art decorative-art">
+              <div class="decor-panel decor-panel-one"></div>
+              <div class="decor-panel decor-panel-two"></div>
+              <div class="decor-panel decor-panel-three"></div>
+            </div>
+
+            <div class="category-info">
+              <div>
+                <h3>Decorative Surfaces</h3>
+                <p>Details that make a difference</p>
+              </div>
+              <span class="round-arrow">↗</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND STORY -->
+    <section class="brand-story-section">
+      <div class="container story-grid">
+
+        <div class="story-visual">
+          <div class="story-frame">
+            <div class="story-frame-inner">
+              <span class="story-symbol">F.</span>
+              <span>THOUGHTFUL MATERIALS</span>
+              <strong>Beautifully<br>considered.</strong>
+            </div>
+          </div>
+
+          <div class="story-caption">
+            THE FRIENDLY SURFACES APPROACH
+          </div>
+        </div>
+
+        <div class="story-content">
+          <span class="eyebrow">A BETTER WAY TO EXPLORE</span>
+
+          <h2>
+            Material choices<br>
+            should feel <span>simple.</span>
+          </h2>
+
+          <p>
+            Finding the right surface is an important part of every
+            space. Friendly Surfaces helps you explore available
+            materials and their catalogues in one place.
+          </p>
+
+          <p>
+            Browse the range, discover finishes you like, and contact
+            us directly for product details and enquiries.
+          </p>
+
+          <a href="about.html" class="btn btn-dark">
+            Get to know us <span>↗</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATALOGUE BANNER -->
+    <section class="section catalogue-section">
+      <div class="container catalogue-banner">
+
+        <div class="catalogue-banner-content">
+          <span class="eyebrow">LOOK CLOSER</span>
+
+          <h2>
+            Explore the details.<br>
+            <span>Find your finish.</span>
+          </h2>
+
+          <p>
+            Open our available product catalogues to explore designs,
+            finishes and product information.
+          </p>
+
+          <a href="catalogue.html" class="btn btn-light">
+            Explore Catalogues ↗
+          </a>
+        </div>
+
+        <div class="catalogue-decoration">
+          <div class="catalogue-paper paper-back"></div>
+          <div class="catalogue-paper paper-middle"></div>
+
+          <div class="catalogue-paper paper-front">
+            <span>FRIENDLY</span>
+            <strong>SURFACES</strong>
+            <small>PRODUCT COLLECTION</small>
+            <div class="paper-lines"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHATSAPP ENQUIRY -->
+    <section class="section enquiry-section">
+      <div class="container enquiry-grid">
+
+        <div>
+          <span class="eyebrow">LET'S TALK MATERIALS</span>
+          <h2>
+            Found something<br>
+            you <span>love?</span>
+          </h2>
+        </div>
+
+        <div class="enquiry-content">
+          <p>
+            Have a product in mind or need more information?
+            Send us an enquiry on WhatsApp and tell us what you're looking for.
+          </p>
+
+          <a
+            href="https://wa.me/917771936644"
+            class="btn btn-dark whatsapp-link"
+            target="_blank"
+            rel="noopener noreferrer">
+            Enquire on WhatsApp <span>↗</span>
+          </a>
+
+          <small>
+            Product availability and details can be confirmed directly with us.
+          </small>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-main">
+
+        <a href="index.html" class="brand footer-brand" aria-label="Friendly Surfaces home">
+          <img
+            src="assets/images/friendly-surfaces-logo.png"
+            alt="Friendly Surfaces"
+            class="brand-logo">
+        </a>
+
+        <p>
+          Discover materials.<br>
+          Create spaces that feel like you.
+        </p>
+
+        <div class="footer-links">
+          <a href="products.html">Products</a>
+          <a href="catalogue.html">Catalogues</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+          <a href="faq.html">FAQs</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>
+          © <span id="currentYear">2026</span> Friendly Surfaces
+        </span>
+
+        <div>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+
+        <span>Made for better spaces.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- AUTOMATIC SLIDESHOW -->
+  <script>
+    (() => {
+      const slides = Array.from(
+        document.querySelectorAll(".hero-background .hero-slide")
+      );
+
+      const dots = Array.from(
+        document.querySelectorAll(".hero-background .hero-slide-dot")
+      );
+
+      const previousButton = document.getElementById("heroPrev");
+      const nextButton = document.getElementById("heroNext");
+      const slideshow = document.getElementById("heroSlides");
+
+      if (!slides.length || !dots.length || !slideshow) return;
+
+      let currentSlide = 0;
+      let timer = null;
+      const delay = 5000;
+
+      function showSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === currentSlide);
+
+          if (i === currentSlide) {
+            dot.setAttribute("aria-current", "true");
+          } else {
+            dot.removeAttribute("aria-current");
+          }
+        });
+      }
+
+      function stopSlideshow() {
+        if (timer !== null) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function startSlideshow() {
+        stopSlideshow();
+
+        if (
+          !document.hidden &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          timer = setInterval(() => {
+            showSlide(currentSlide + 1);
+          }, delay);
+        }
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        startSlideshow();
+      }
+
+      if (previousButton) {
+        previousButton.addEventListener("click", () => {
+          goToSlide(currentSlide - 1);
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener("click", () => {
+          goToSlide(currentSlide + 1);
+        });
+      }
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          goToSlide(index);
+        });
+      });
+
+      slideshow.addEventListener("mouseenter", stopSlideshow);
+      slideshow.addEventListener("mouseleave", startSlideshow);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopSlideshow();
+        } else {
+          startSlideshow();
+        }
+      });
+
+      showSlide(0);
+      startSlideshow();
+    })();
+  </script>
+
+</body>
+</html>

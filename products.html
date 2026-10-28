@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Our Products | Friendly Surfaces</title>
+  <meta name="description" content="Explore laminates, mica, plywood and decorative surfaces at Friendly Surfaces. Browse catalogues and enquire on WhatsApp.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <style>
+    .catalogues-page {
+      width: min(1150px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0;
+      box-sizing: border-box;
+    }
+
+    .catalogues-intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 36px;
+    }
+
+    .catalogues-intro h1 {
+      margin: 12px 0;
+      line-height: 1.2;
+    }
+
+    .catalogues-intro p {
+      line-height: 1.8;
+    }
+
+    .catalogue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .catalogue-card {
+      min-width: 0;
+      padding: 28px;
+      border: 1px solid #e7e2d9;
+      border-radius: 14px;
+      background: #fff;
+      box-sizing: border-box;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .catalogue-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(25, 40, 30, 0.08);
+    }
+
+    .catalogue-card h2 {
+      margin: 14px 0;
+      font-size: 23px;
+      line-height: 1.35;
+    }
+
+    .catalogue-card p {
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .catalogue-label {
+      color: #64785e;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+
+    .catalogue-button {
+      display: inline-block;
+      padding: 12px 17px;
+      border: 1px solid #284b38;
+      border-radius: 7px;
+      background: #284b38;
+      color: #fff;
+      text-decoration: none;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .catalogue-button:hover {
+      background: #1d382a;
+    }
+
+    .whatsapp-section {
+      margin-top: 34px;
+      padding: 36px 24px;
+      text-align: center;
+      background: #f5f3ed;
+      border: 1px solid #eae6dc;
+      border-radius: 14px;
+    }
+
+    .whatsapp-section h2 {
+      margin-top: 0;
+    }
+
+    .whatsapp-section p {
+      line-height: 1.8;
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 13px 22px;
+      border-radius: 7px;
+      background: #218c51;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .whatsapp-button:hover {
+      background: #176d3d;
+    }
+
+    .product-search-section {
+      margin-top: 46px;
+      text-align: center;
+    }
+
+    .product-search-section h2 {
+      margin-bottom: 10px;
+    }
+
+    .product-search {
+      display: block;
+      width: 100%;
+      max-width: 540px;
+      margin: 20px auto;
+      padding: 14px 16px;
+      border: 1px solid #d8d8d0;
+      border-radius: 8px;
+      background: #fff;
+      color: #222;
+      font: inherit;
+      box-sizing: border-box;
+    }
+
+    .product-search:focus {
+      outline: 2px solid #81947b;
+      outline-offset: 2px;
+    }
+
+    .product-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .product-filters .active {
+      background: #c4a36b;
+      border-color: #c4a36b;
+      color: #18271e;
+    }
+
+    #productCount {
+      color: #62665f;
+      font-size: 14px;
+    }
+
+    #productGrid {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .catalogue-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .catalogues-page {
+        padding: 36px 0;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .catalogue-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .catalogues-page {
+        width: calc(100% - 32px);
+        padding: 28px 0;
+      }
+
+      .catalogue-card {
+        padding: 23px;
+      }
+
+      .whatsapp-section {
+        padding: 28px 18px;
+      }
+
+      .product-filters .catalogue-button {
+        padding: 10px 12px;
+      }
+    }
+    
+/* Friendly Surfaces - richer product page */
+
+.catalogues-page {
+  width: min(1240px, calc(100% - 40px));
+}
+
+.catalogues-intro {
+  max-width: 850px;
+  padding: 54px 24px;
+  margin-bottom: 42px;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(196,163,107,.20), transparent 38%),
+    linear-gradient(135deg, #203c2c, #345540);
+  color: #fff;
+}
+
+.catalogues-intro .catalogue-label {
+  color: #dfc18a;
+}
+
+.catalogues-intro h1 {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(32px, 5vw, 52px);
+  letter-spacing: -1.2px;
+}
+
+.catalogues-intro p:not(.catalogue-label) {
+  max-width: 650px;
+  margin: 16px auto 0;
+  color: rgba(255,255,255,.84);
+}
+
+.catalogue-grid {
+  gap: 24px;
+}
+
+.catalogue-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff, #f8f6f0);
+  box-shadow: 0 8px 26px rgba(32,52,38,.055);
+}
+
+.catalogue-card h2 {
+  color: #253b2d;
+}
+
+.catalogue-card p {
+  color: #62665f;
+}
+
+.catalogue-button {
+  border-radius: 7px;
+}
+
+.whatsapp-section {
+  margin-top: 52px;
+  padding: 44px 24px;
+  background:
+    radial-gradient(ellipse at 0 100%, rgba(196,163,107,.15), transparent 45%),
+    #f4f1e8;
+}
+
+.product-search-section {
+  margin-top: 58px;
+  padding: 38px 24px;
+  border: 1px solid #e7e2d8;
+  border-radius: 18px;
+  background: #faf9f5;
+}
+
+.product-search-section h2 {
+  color: #253b2d;
+}
+
+.product-search {
+  min-height: 50px;
+  border-color: #d8d7cb;
+  box-shadow: 0 3px 12px rgba(25,40,30,.035);
+}
+
+.product-filters .catalogue-button {
+  background: #fff;
+  color: #284b38;
+}
+
+.product-filters .catalogue-button.active {
+  background: #c4a36b;
+  border-color: #c4a36b;
+  color: #18271e;
+}
+
+@media (max-width: 550px) {
+  .catalogues-intro {
+    padding: 38px 20px;
+    border-radius: 13px;
+  }
+
+  .product-search-section {
+    padding: 28px 15px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand" aria-label="Friendly Surfaces home">
+        <img
+  src="assets/images/friendly-surfaces-logo.png"
+  alt="Friendly Surfaces"
+  class="brand-logo">
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active" aria-current="page">Products</a>
+        <a href="catalogue.html">Catalogues</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="catalogues-page">
+
+      <div class="catalogues-intro">
+        <p class="catalogue-label">THE COLLECTION</p>
+        <h1>Find the Right Surface for Your Space</h1>
+        <p>
+          Explore materials, discover designs and browse our available
+          catalogues to find the right fit for your interiors.
+        </p>
+      </div>
+
+      <section aria-label="Product categories">
+        <div class="catalogue-grid">
+
+          <article class="catalogue-card">
+            <span class="catalogue-label">01 / SURFACES</span>
+            <h2>Laminates &amp; Mica</h2>
+            <p>
+              Explore laminate colours, patterns and finishes through
+              our available product catalogues.
+            </p>
+            <a class="catalogue-button" href="catalogue.html">
+              Explore Catalogues ↗
+            </a>
+          </article>
+
+          <article class="catalogue-card">
+            <span class="catalogue-label">02 / MATERIALS</span>
+            <h2>Plywood</h2>
+            <p>
+              Looking for plywood? Contact us to ask about available
+              options, specifications and product details.
+            </p>
+            <a class="catalogue-button" href="contact.html">
+              Make an Enquiry ↗
+            </a>
+          </article>
+
+          <article class="catalogue-card">
+            <span class="catalogue-label">03 / DESIGN</span>
+            <h2>Decorative Surfaces</h2>
+            <p>
+              Browse decorative surface collections and explore
+              design possibilities for your space.
+            </p>
+            <a class="catalogue-button" href="catalogue.html">
+              View Collections ↗
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="whatsapp-section">
+        <p class="catalogue-label">NEED HELP CHOOSING?</p>
+        <h2>Looking for a Specific Design?</h2>
+        <p>
+          Tell us what you're looking for. We'll help you enquire
+          about available options.
+        </p>
+        <a
+          class="whatsapp-button whatsapp-link"
+          href="https://wa.me/917771936644"
+          target="_blank"
+          rel="noopener noreferrer">
+          Enquire on WhatsApp ↗
+        </a>
+      </section>
+
+      <section class="product-search-section" aria-label="Search products">
+        <p class="catalogue-label">FIND YOUR PRODUCT</p>
+        <h2>Browse by Product Name</h2>
+        <p>
+          Search the verified product listings as more product details
+          are added to our collection.
+        </p>
+
+        <label for="productSearch">Search products</label>
+        <input
+          class="product-search"
+          id="productSearch"
+          type="search"
+          placeholder="Search by product or brand..."
+          autocomplete="off">
+
+        <div class="product-filters" id="productFilters">
+          <button type="button" class="catalogue-button active" data-category="all">
+            All Products
+          </button>
+          <button type="button" class="catalogue-button" data-category="laminates">
+            Laminates &amp; Mica
+          </button>
+          <button type="button" class="catalogue-button" data-category="plywood">
+            Plywood
+          </button>
+          <button type="button" class="catalogue-button" data-category="decorative">
+            Decorative Surfaces
+          </button>
+        </div>
+
+        <p id="productCount" aria-live="polite"></p>
+        <div id="productGrid" class="catalogue-grid"></div>
+      </section>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © <span id="currentYear"></span> Friendly Surfaces.
+        All rights reserved.
+      </p>
+      <p>
+        <a href="faq.html">FAQs</a> ·
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="products-page.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

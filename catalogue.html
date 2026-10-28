@@ -1,0 +1,793 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Product Catalogues | Friendly Surfaces</title>
+  <meta name="description" content="Explore laminate, mica, acrylic and decorative surface catalogues from Friendly Surfaces. View original PDF catalogues and enquire on WhatsApp.">
+  <meta name="theme-color" content="#203c2c">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <style>
+    :root {
+      --surface-green: #203c2c;
+      --surface-green-light: #345540;
+      --surface-cream: #f7f5ef;
+      --surface-gold: #c4a36b;
+      --surface-text: #26352a;
+      --surface-muted: #696e66;
+      --surface-border: #e6e1d6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--surface-cream);
+    }
+
+    .catalogue-page {
+      width: min(1220px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 35px 0 75px;
+    }
+
+    /* HERO */
+
+    .catalogue-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 76px 30px 70px;
+      margin-bottom: 45px;
+      border-radius: 20px;
+      text-align: center;
+      color: #fff;
+      background:
+        radial-gradient(
+          ellipse at 85% 15%,
+          rgba(196, 163, 107, 0.23),
+          transparent 35%
+        ),
+        radial-gradient(
+          ellipse at 0% 100%,
+          rgba(255, 255, 255, 0.06),
+          transparent 40%
+        ),
+        linear-gradient(
+          125deg,
+          #1c3526 0%,
+          #2c4a35 60%,
+          #385640 100%
+        );
+    }
+
+    .catalogue-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 300px;
+      height: 300px;
+      right: -120px;
+      bottom: -180px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 28px rgba(255,255,255,.025),
+        0 0 0 58px rgba(255,255,255,.025);
+    }
+
+    .catalogue-eyebrow {
+      margin: 0 0 17px;
+      color: #dfc18a;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+    }
+
+    .catalogue-hero h1 {
+      max-width: 760px;
+      margin: 0 auto 20px;
+      color: #fff;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -1.5px;
+    }
+
+    .catalogue-hero > p:not(.catalogue-eyebrow) {
+      max-width: 660px;
+      margin: 0 auto;
+      color: rgba(255,255,255,.82);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .catalogue-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .catalogue-tags span {
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 30px;
+      background: rgba(255,255,255,.07);
+      color: #f7f4ec;
+      font-size: 12px;
+    }
+
+    /* SECTION HEADING */
+
+    .catalogue-section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin: 0 0 24px;
+    }
+
+    .catalogue-section-heading .catalogue-eyebrow {
+      margin-bottom: 9px;
+      color: #8b754c;
+    }
+
+    .catalogue-section-heading h2 {
+      margin: 0;
+      color: var(--surface-text);
+      font-size: clamp(25px, 3.5vw, 34px);
+      line-height: 1.25;
+      letter-spacing: -.7px;
+    }
+
+    .catalogue-section-heading > p {
+      max-width: 320px;
+      margin: 0;
+      color: var(--surface-muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* CATALOGUE GRID */
+
+    .catalogue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .catalogue-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 15px;
+      overflow: hidden;
+      border: 1px solid var(--surface-border);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 5px 22px rgba(31, 48, 35, .035);
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+    }
+
+    .catalogue-card:hover {
+      transform: translateY(-5px);
+      border-color: #d4c8b2;
+      box-shadow: 0 15px 32px rgba(31, 48, 35, .09);
+    }
+
+    /* PDF PREVIEW */
+
+    .catalogue-preview {
+      position: relative;
+      height: 265px;
+      overflow: hidden;
+      border: 1px solid #ece8df;
+      border-radius: 10px;
+      background:
+        radial-gradient(
+          ellipse at top right,
+          rgba(196,163,107,.15),
+          transparent 45%
+        ),
+        #f2f0e9;
+    }
+
+    .catalogue-preview iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #f2f0e9;
+    }
+
+    .catalogue-preview-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      height: 100%;
+      padding: 20px;
+      text-align: center;
+      color: var(--surface-green);
+    }
+
+    .pdf-icon {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 68px;
+      border: 1px solid #d8cdb8;
+      border-radius: 7px;
+      background: #fff;
+      color: #8c6643;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 5px 15px rgba(32, 60, 44, .07);
+    }
+
+    .catalogue-preview-fallback p {
+      margin: 0;
+      color: var(--surface-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .catalogue-card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 5px 5px;
+    }
+
+    .catalogue-number {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 13px;
+      color: #92784b;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.7px;
+    }
+
+    .catalogue-number::before {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--surface-gold);
+    }
+
+    .catalogue-card h3 {
+      margin: 0 0 10px;
+      color: var(--surface-text);
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .catalogue-card-body > p {
+      flex: 1;
+      margin: 0 0 20px;
+      color: var(--surface-muted);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .catalogue-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 16px;
+      border: 1px solid var(--surface-green);
+      border-radius: 7px;
+      background: var(--surface-green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: background .2s ease, border-color .2s ease;
+    }
+
+    .catalogue-link:hover {
+      border-color: #172d20;
+      background: #172d20;
+    }
+
+    .catalogue-link:focus-visible,
+    .catalogue-help-button:focus-visible {
+      outline: 2px solid var(--surface-gold);
+      outline-offset: 3px;
+    }
+
+    /* WHATSAPP CTA */
+
+    .catalogue-help {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      margin-top: 55px;
+      padding: 48px 25px;
+      border: 1px solid #e5ddcd;
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          ellipse at 100% 0,
+          rgba(196,163,107,.20),
+          transparent 42%
+        ),
+        linear-gradient(135deg, #f4f1e8, #fbfaf6);
+      text-align: center;
+    }
+
+    .catalogue-help .catalogue-eyebrow {
+      color: #8b754c;
+    }
+
+    .catalogue-help h2 {
+      margin: 0 0 13px;
+      color: var(--surface-text);
+      font-size: clamp(25px, 3.5vw, 34px);
+      line-height: 1.3;
+    }
+
+    .catalogue-help > p:not(.catalogue-eyebrow) {
+      max-width: 600px;
+      margin: 0 auto 23px;
+      color: var(--surface-muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .catalogue-help-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 47px;
+      padding: 13px 22px;
+      border-radius: 7px;
+      background: #218c51;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+
+    .catalogue-help-button:hover {
+      background: #176d3d;
+    }
+
+    .catalogue-note {
+      margin: 20px 0 0;
+      color: #74776f;
+      font-size: 12px;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 950px) {
+      .catalogue-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .catalogue-preview {
+        height: 280px;
+      }
+
+      .catalogue-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .catalogue-page {
+        width: calc(100% - 28px);
+        padding: 22px 0 45px;
+      }
+
+      .catalogue-hero {
+        padding: 48px 19px 43px;
+        margin-bottom: 35px;
+        border-radius: 14px;
+      }
+
+      .catalogue-hero h1 {
+        font-size: clamp(31px, 9vw, 42px);
+        letter-spacing: -.8px;
+      }
+
+      .catalogue-hero > p:not(.catalogue-eyebrow) {
+        font-size: 14px;
+      }
+
+      .catalogue-tags {
+        gap: 8px;
+        margin-top: 22px;
+      }
+
+      .catalogue-tags span {
+        padding: 8px 11px;
+        font-size: 11px;
+      }
+
+      .catalogue-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .catalogue-card {
+        padding: 12px;
+      }
+
+      .catalogue-preview {
+        height: 300px;
+      }
+
+      .catalogue-card-body {
+        padding: 18px 5px 5px;
+      }
+
+      .catalogue-card h3 {
+        font-size: 19px;
+      }
+
+      .catalogue-help {
+        margin-top: 35px;
+        padding: 36px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .catalogue-card,
+      .catalogue-link,
+      .catalogue-help-button {
+        transition: none;
+      }
+
+      .catalogue-card:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand"
+         aria-label="Friendly Surfaces home">
+        <img
+          src="assets/images/friendly-surfaces-logo.png"
+          alt="Friendly Surfaces"
+          class="brand-logo">
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="catalogue.html" class="active" aria-current="page">Catalogues</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="catalogue-page">
+
+      <!-- HERO SECTION -->
+      <section class="catalogue-hero">
+        <p class="catalogue-eyebrow">THE FRIENDLY COLLECTION</p>
+
+        <h1>Discover Surfaces That Inspire</h1>
+
+        <p>
+          Explore our available product catalogues to discover
+          colours, patterns and finishes for your interior projects.
+          Found a design you like? Contact us to enquire.
+        </p>
+
+        <div class="catalogue-tags">
+          <span>Laminate &amp; Mica</span>
+          <span>Acrylic Surfaces</span>
+          <span>Decorative Designs</span>
+        </div>
+      </section>
+
+      <!-- CATALOGUE SECTION -->
+      <section aria-labelledby="catalogueHeading">
+
+        <div class="catalogue-section-heading">
+          <div>
+            <p class="catalogue-eyebrow">EXPLORE THE COLLECTION</p>
+            <h2 id="catalogueHeading">Our Product Catalogues</h2>
+          </div>
+
+          <p>
+            Open a catalogue to view its original product designs
+            and details.
+          </p>
+        </div>
+
+        <div class="catalogue-grid">
+
+          <!-- 01: ACRYLIC -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/ACYLIC%20NEW%20FOLDER%20PDF.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Acrylic New Folder PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 01</span>
+              <h3>Acrylic New Folder</h3>
+              <p>
+                Explore the acrylic surface collection and
+                browse the designs featured in the PDF.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/ACYLIC%20NEW%20FOLDER%20PDF.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 02: SKYDECOR -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/Skydecor_Master.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Skydecor PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 02</span>
+              <h3>Skydecor</h3>
+              <p>
+                Browse the Skydecor catalogue to explore the
+                designs and product information it contains.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/Skydecor_Master.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 03: LINER -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/Liner%20Folder%20E-catalogue.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Liner E-catalogue PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 03</span>
+              <h3>Liner</h3>
+              <p>
+                Open the Liner e-catalogue to browse the product
+                designs and details included in the PDF.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/Liner%20Folder%20E-catalogue.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 04: AMBIENCE -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/Ambience%200.8MM.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Ambience 0.8MM PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 04</span>
+              <h3>Ambience 0.8MM</h3>
+              <p>
+                Browse the Ambience catalogue to review the
+                designs and product details shown in the PDF.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/Ambience%200.8MM.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 05: MAESTRO -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/Maestro%20FR%20Flexi%20Laminate%20.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Maestro FR Flexi Laminate PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 05</span>
+              <h3>Maestro FR Flexi Laminate</h3>
+              <p>
+                Open the Maestro FR Flexi Laminate catalogue
+                to explore the designs included in the PDF.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/Maestro%20FR%20Flexi%20Laminate%20.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 06: KORI OZONE -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/KORI%20OZONE%20ACRYLIC%20FOLDER.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Kori Ozone Acrylic PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 06</span>
+              <h3>Kori Ozone Acrylic</h3>
+              <p>
+                Browse the Kori Ozone Acrylic catalogue to
+                discover the designs featured in the PDF.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/KORI%20OZONE%20ACRYLIC%20FOLDER.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 07: PAPERLAM -->
+          <article class="catalogue-card">
+            <div class="catalogue-preview">
+              <iframe
+                src="assets/catalogues/PAPERLAM_INTERACTIVE.pdf#page=1&toolbar=0&navpanes=0&view=FitH"
+                title="Paperlam PDF cover preview"
+                loading="lazy">
+              </iframe>
+            </div>
+
+            <div class="catalogue-card-body">
+              <span class="catalogue-number">CATALOGUE 07</span>
+              <h3>Paperlam</h3>
+              <p>
+                Open the Paperlam catalogue to review the
+                product information available in the PDF.
+              </p>
+              <a
+                class="catalogue-link"
+                href="assets/catalogues/PAPERLAM_INTERACTIVE.pdf"
+                target="_blank"
+                rel="noopener noreferrer">
+                View Catalogue <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="catalogue-note">
+          Catalogue previews depend on your browser's built-in PDF viewer.
+          Open the original PDF using View Catalogue if a preview is unavailable.
+        </p>
+
+      </section>
+
+      <!-- WHATSAPP ENQUIRY -->
+      <section class="catalogue-help">
+        <p class="catalogue-eyebrow">LET'S FIND YOUR DESIGN</p>
+
+        <h2>Found Something You Like?</h2>
+
+        <p>
+          Whether you're enquiring for a home project or a business
+          requirement, message us about the catalogue or design
+          you're interested in.
+        </p>
+
+        <a
+          class="catalogue-help-button"
+          href="https://wa.me/917771936644?text=Hi%20Friendly%20Surfaces%2C%20I%20would%20like%20to%20enquire%20about%20your%20product%20catalogues."
+          target="_blank"
+          rel="noopener noreferrer">
+          Enquire on WhatsApp <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © <span id="currentYear"></span> Friendly Surfaces.
+        All rights reserved.
+      </p>
+
+      <p>
+        <a href="faq.html">FAQs</a> ·
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
